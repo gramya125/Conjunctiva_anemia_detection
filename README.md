@@ -7,7 +7,7 @@ This project provides a deep learning pipeline for detecting anemia using eye im
 
 ## Components
 
-- `anemia_pipeline.py`: Runs detection and classification on a single image.
+- `anemia_detection.py`: Runs detection and classification on a single image.
 - `app.py`: Flask API that accepts left and right eye images and returns the predicted anemia label and cropped image in base64 format.
 - `models/`: Contains trained model files (`.pt`, `.pth`), tracked via Git LFS.
 - `static/`: Stores cropped conjunctiva images.
