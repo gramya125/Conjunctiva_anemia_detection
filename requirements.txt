@@ -1,0 +1,10 @@
+ultralytics==8.0.192
+flask==2.3.2
+torch>=2.0.0
+torchvision>=0.15.0
+opencv-python
+numpy
+Pillow
+matplotlib
+scikit-learn
+flask-cors
