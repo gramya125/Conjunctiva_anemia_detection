@@ -1,71 +1,137 @@
 # Conjunctiva Anemia Detection
 
-This project provides a deep learning pipeline for detecting anemia using eye images by focusing on the conjunctiva region. It uses a two-stage approach:
+> ⚠️ **Note**: This system is under active development. It is not intended for clinical use.
 
-1. **Conjunctiva Detection**: A YOLOv8 model detects and crops the conjunctiva from both left and right eye images.
-2. **Anemia Classification**: A CNN-based classifier (e.g., MobileNetV2 or ResNet) predicts whether the person is anemic based on the cropped region.
+An AI-powered system that predicts anemia using images of the conjunctiva (inner eyelid). The pipeline uses a YOLOv8 model to detect and crop the conjunctiva region from left and right eye images, followed by a CNN-based classifier to determine anemia status. The system supports both command-line testing and REST API integration.
 
-## Components
+---
 
-- `anemia_detection.py`: Runs detection and classification on a single image.
-- `app.py`: Flask API that accepts left and right eye images and returns the predicted anemia label and cropped image in base64 format.
-- `models/`: Contains trained model files (`.pt`, `.pth`), tracked via Git LFS.
-- `test_images`: Stores cropped conjunctiva images.
-- `app.py`: Helper functions for YOLOv8 detection and classification.
+## 🔍 Key Features
 
-## Setup
+- **Conjunctiva Detection** – YOLOv8 model auto-detects and crops inner eyelid (conjunctiva)
+- **Anemia Classification** – CNN (MobileNetV2 or ResNet) predicts anemia from cropped images
+- **Dual Image Support** – Accepts both left and right eye inputs
+- **REST API** – Flask-based API for web and mobile integration
+- **Cropped Image Output** – Returns base64-encoded cropped conjunctiva images
 
-### Clone the repository
+---
+
+## 📌 Architecture
+
+Eye Image (Left & Right)  
+&nbsp;&nbsp;&nbsp;&nbsp;↓  
+**YOLOv8** → Cropped Conjunctiva  
+&nbsp;&nbsp;&nbsp;&nbsp;↓  
+**CNN Classifier** → Prediction (`Anemia` / `Non-Anemia`)
+
+---
+
+## 🗂️ Project Structure
+
+```
+conjunctiva_anemia_detection/
+├── anemia_pipeline.py         # CLI script for local testing
+├── app.py                     # Flask API server
+├── models/                    # YOLOv8 & classifier model files
+│   ├── yolo_conjunctiva.pt
+│   └── anemia_classifier.pth
+├── static/                    # Stores cropped conjunctiva images
+├── utils/                     # YOLO & classification utilities
+├── test_images/               # Sample eye images for testing
+├── requirements.txt
+└── README.md
+```
+
+---
+
+## ⚙️ Quick Start
+
+### 🔧 Prerequisites
+
+- Python 3.8+
+- pip (Python package manager)
+
+### 📥 Installation
 
 ```bash
 git clone https://github.com/gramya125/Conjunctiva_anemia_detection.git
 cd Conjunctiva_anemia_detection
-```
 
-### Install Python dependencies
+# (Optional) Create a virtual environment
+python -m venv venv
+source venv/bin/activate        # On Windows: venv\Scripts\activate
 
-```bash
+# Install dependencies
 pip install -r requirements.txt
-```
 
-### Install Git LFS and pull large files
-
-```bash
+# Install Git LFS and pull model files
 git lfs install
 git lfs pull
 ```
 
-## Usage
+---
 
-### Run on a Local Image
+## 🚀 Usage
+
+### Method 1: Command Line Interface (CLI)
 
 ```bash
-python anemia_pipeline.py --image path/to/image.jpg
+python anemia_pipeline.py --image path/to/eye_image.jpg
 ```
 
-### Run the Flask API
+- Detects and crops conjunctiva
+- Runs anemia classification
+- Saves cropped image and displays prediction
+
+### Method 2: REST API (Flask)
 
 ```bash
 python app.py
 ```
 
-Send a POST request to `/predict` with form-data fields:
+Send a `POST` request to `http://localhost:5000/predict` with form-data fields:
 
 - `left_eye`: image file  
 - `right_eye`: image file
 
-The response includes:
+Response includes:
 
-- Predicted label: `Anemia` or `Non-Anemia`
-- Base64-encoded cropped conjunctiva image
+- Predicted Label: `Anemia` or `Non-Anemia`
+- Base64-encoded cropped image
 
-## Notes
+---
 
-- Model files larger than 100 MB are tracked using Git LFS.
-- This project is for research and development purposes only.
+## 🛠 Requirements
 
-## Contact
+```text
+ultralytics==8.0.192
+flask==2.3.2
+torch>=2.0.0
+torchvision>=0.15.0
+opencv-python
+numpy
+Pillow
+matplotlib
+scikit-learn
+flask-cors
+```
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+
+---
+
+## 📬 Contact
 
 Author: gramya125  
 Email: g25ramya@gmail.com  
 GitHub: [https://github.com/gramya125](https://github.com/gramya125)
+
+---
+
+## ⚠️ Medical Disclaimer
+
+This project is intended for research and educational purposes only. It is **not** a substitute for professional medical advice, diagnosis, or treatment. Always consult qualified healthcare professionals.
