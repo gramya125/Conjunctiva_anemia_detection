@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 LEFT_IMAGE_PATH = "test_images/jamileft.jpg"
 RIGHT_IMAGE_PATH = "test_images/jamiright.jpg"
 YOLO_MODEL_PATH = "models/yolov8_model.pt"
-RESNET_MODEL_PATH = "models/anemia_model.pth"
+RESNET_MODEL_PATH = "models/resnet101_anemia_model.pth"
 
 # === Load YOLOv8 model ===
 yolo_model = YOLO(YOLO_MODEL_PATH)
