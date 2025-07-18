@@ -20,7 +20,7 @@ os.makedirs(CROPPED_FOLDER, exist_ok=True)
 yolo_model = YOLO("models/yolov8_model.pt")
 
 # === Load ResNet Model ===
-checkpoint = torch.load("models/anemia_model.pth", map_location='cpu')
+checkpoint = torch.load("models/resnet101_anemia_model1.pth", map_location='cpu')
 model = resnet101(weights=None)
 model.fc = torch.nn.Linear(model.fc.in_features, 2)
 model.load_state_dict(checkpoint['model_state_dict'])
